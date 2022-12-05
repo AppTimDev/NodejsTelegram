@@ -1,0 +1,9 @@
+node_modules
+package-lock.json
+notcommit
+.env
+.env.production
+log
+.note
+download/*
+*.rest
