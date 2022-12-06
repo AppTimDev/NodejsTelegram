@@ -121,7 +121,7 @@ function InitBot() {
     bot.hears('hi', async (ctx) => {
         try {
             console.log('on hear: hi');
-            //ctx.reply('Hi!')
+            ctx.reply('Hi!')
         } catch (err) {
             console.log(err);
         }
@@ -243,15 +243,12 @@ function InitBot() {
         }        
     })
 
-    //for testing 
-    //development only
-    bot.launch();
-
     // Enable graceful stop
     process.once('SIGINT', () => bot.stop('SIGINT'));
     process.once('SIGTERM', () => bot.stop('SIGTERM'));
 
 }
+
 
 //sent to me only
 function sendMessage(msg) {
@@ -270,6 +267,7 @@ function sendMessage(msg) {
     }
     return telegram.sendMessage(process.env.MYID, text, extra);
 }
+
 
 module.exports.bot = bot
 module.exports.telegram = telegram

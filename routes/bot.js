@@ -9,6 +9,22 @@ const {
 } = require("../common/botLib");
 
 
+router.get('/', async (req, res) => {
+    console.log('bot api: ');
+    try {
+        return res.json({
+            ok: true,
+            message: "bot api"
+        })
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            message: err.message
+        })
+    }
+})
+
+
 router.post('/sendMessage', async (req, res) => {
     console.log('bot api: sendMessage');
     try {

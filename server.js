@@ -2,7 +2,7 @@ const express = require('express');
 const session = require('express-session')
 const cookieParser = require('cookie-parser')
 const path = require('path');
-
+const crypto = require('crypto')
 
 const isProduction = process.env.NODE_ENV === 'production'
 if (isProduction) {
@@ -20,7 +20,7 @@ console.log(`download folder path: ${global.downloadPath}`);
 // console.log(`Mytoken: ${process.env.MYTOKEN}`);
 
 //init the tg bot
-const { InitBot } = require('./common/botLib');
+const { InitBot, bot } = require('./common/botLib');
 InitBot()
 
 const app = express();
@@ -44,6 +44,20 @@ const ApiUrl = (link) => {
     return api_url + link;
 }
 console.log(`API URL: ${api_url}`);
+
+
+if(isProduction){
+    const secret_path = crypto.randomBytes(64).toString("hex")
+    app.use(bot.webhookCallback(`/${secret_path}`))
+    bot.telegram.setWebhook(`${process.env.TELEGRAM_WEBHOOK_URL}/${secret_path}`)
+    console.log(`set telegram webhook callback url: ${process.env.TELEGRAM_WEBHOOK_URL}/${secret_path}`);
+    
+}else{
+    //for testing 
+    //development only
+    bot.launch();
+}
+
 
 // Import all middlewares
 // support parsing of application/json type post data, 

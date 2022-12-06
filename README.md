@@ -44,11 +44,34 @@ https://api.telegram.org/file/bot<token>/<file_path>
 
 ---
 
+## ngrok 
+Use ngrok to provide a public url for testing the telgram webhooks.
+
+1. Create an account and log in. 
+https://dashboard.ngrok.com/login
+
+2. Download ngrok
+https://dashboard.ngrok.com/get-started/setup
+
+3. Running this command will add your authtoken to the default ngrok.yml configuration file.
+```cmd
+ngrok config add-authtoken [your__token]
+```
+
+4. To start a HTTP tunnel forwarding to your local port 2000, run this next:
+```cmd
+ngrok http 2000
+```
+
+---
+
 ## Telegram api (keywords)
 getUpdates  
-sendMessage  
-
+getWebhookInfo  
+setWebhook  
 deleteWebhook  
+
+sendMessage  
 
 CallbackQuery  
 InlineKeyboardMarkup  
@@ -56,7 +79,7 @@ ReplyKeyboardMarkup
 ReplyKeyboardRemove  
 
 setMyCommands  
-deleteMyCommands
+deleteMyCommands  
 
 ---
 
